@@ -78,10 +78,17 @@ async function placeCall() {
     body.conversation_initiation_client_data.dynamic_variables = dynamicVars.value
   }
 
+  // Always inject outbound call direction context into dynamic variables
+  body.conversation_initiation_client_data = body.conversation_initiation_client_data || {}
+  body.conversation_initiation_client_data.dynamic_variables = {
+    ...body.conversation_initiation_client_data.dynamic_variables,
+    call_direction: 'outbound',
+    call_direction_context: 'This is an OUTBOUND call. You are calling the recipient. Introduce yourself, state the reason for your call, and be polite about the fact that you initiated this call. Do not act as if you are receiving a call.'
+  }
+
   // Conversation overrides
   const ov = overrides.value
   if (ov.prompt || ov.firstMessage || ov.voiceId || ov.language || ov.llmModel) {
-    body.conversation_initiation_client_data = body.conversation_initiation_client_data || {}
     const configOverride: any = {}
     if (ov.prompt || ov.firstMessage) {
       configOverride.agent = { prompt: {} }
@@ -159,7 +166,22 @@ onUnmounted(() => stopPolling())
   <div class="space-y-6">
     <!-- Call form -->
     <div class="panel p-5">
-      <h3 class="text-sm font-bold text-text-secondary uppercase tracking-widest mb-4">Outbound Call</h3>
+      <div class="flex items-center gap-3 mb-4">
+        <h3 class="text-sm font-bold text-text-secondary uppercase tracking-widest">Outbound Call</h3>
+        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-accent-amber/10 text-accent-amber border border-accent-amber/20">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" />
+          </svg>
+          Outgoing
+        </span>
+      </div>
+
+      <!-- Outbound call guidance -->
+      <div class="mb-4 p-3 bg-accent-amber/5 border border-accent-amber/15 rounded-lg">
+        <p class="text-[11px] text-text-secondary leading-relaxed">
+          <span class="font-semibold text-accent-amber">Outbound call:</span> Your agent will dial the recipient. The agent's first message should introduce itself and state the reason for calling. Outbound call direction context is automatically injected into the conversation.
+        </p>
+      </div>
 
       <div v-if="error" class="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg">
         <p class="text-xs text-red-400">{{ error }}</p>

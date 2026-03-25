@@ -65,6 +65,17 @@ const metadata = computed(() => conversation.value?.metadata || {})
 const analysis = computed(() => conversation.value?.analysis || {})
 const status = computed(() => conversation.value?.status || 'unknown')
 const callSuccessful = computed(() => analysis.value?.call_successful)
+const callDirection = computed(() => {
+  // ElevenLabs metadata includes conversation_initiation_source or call direction info
+  const source = conversation.value?.conversation_initiation_client_data?.conversation_initiation_source
+    || metadata.value?.initiation_source
+    || conversation.value?.metadata?.call_type
+  if (source === 'outbound' || source === 'api_outbound') return 'outbound'
+  if (source === 'inbound' || source === 'phone_inbound') return 'inbound'
+  // Fallback: check if there's a to_number in client data (outbound calls have this)
+  if (conversation.value?.conversation_initiation_client_data?.to_number) return 'outbound'
+  return 'inbound' // default assumption
+})
 </script>
 
 <template>
@@ -101,6 +112,18 @@ const callSuccessful = computed(() => analysis.value?.call_successful)
       <!-- Metadata grid -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
         <div class="bg-surface-700/50 rounded-lg p-3">
+          <span class="text-[10px] text-text-muted uppercase block mb-0.5">Direction</span>
+          <div class="flex items-center gap-1.5">
+            <svg v-if="callDirection === 'outbound'" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-amber">
+              <line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" />
+            </svg>
+            <svg v-else width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-orange">
+              <line x1="17" y1="7" x2="7" y2="17" /><polyline points="17 17 7 17 7 7" />
+            </svg>
+            <span class="text-sm font-semibold text-text-primary capitalize">{{ callDirection }}</span>
+          </div>
+        </div>
+        <div class="bg-surface-700/50 rounded-lg p-3">
           <span class="text-[10px] text-text-muted uppercase block mb-0.5">Duration</span>
           <span class="text-sm font-mono font-semibold text-text-primary">{{ formatDuration(metadata.call_duration_secs) }}</span>
         </div>
@@ -113,8 +136,8 @@ const callSuccessful = computed(() => analysis.value?.call_successful)
           <span class="text-sm font-mono font-semibold text-text-primary">{{ Math.round(metadata.latency?.avg || metadata.latency?.p50 || 0) }}ms</span>
         </div>
         <div v-if="metadata.cost != null" class="bg-surface-700/50 rounded-lg p-3">
-          <span class="text-[10px] text-text-muted uppercase block mb-0.5">Cost</span>
-          <span class="text-sm font-mono font-semibold text-text-primary">${{ (metadata.cost || 0).toFixed(4) }}</span>
+          <span class="text-[10px] text-text-muted uppercase block mb-0.5">Credits Used</span>
+          <span class="text-sm font-mono font-semibold text-text-primary">{{ Math.round(metadata.cost || 0).toLocaleString() }}</span>
         </div>
       </div>
 
