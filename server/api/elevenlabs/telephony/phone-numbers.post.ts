@@ -50,20 +50,29 @@ export default defineEventHandler(async (event) => {
         twilio: {
           phone_number: phoneNumber,
           label,
-          twilio_account_sid: twilioAccountSid,
-          twilio_auth_token: twilioAuthToken
+          sid: twilioAccountSid,
+          token: twilioAuthToken
         }
       })
     })
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}))
+      // ElevenLabs 422 returns detail as an array of validation errors
+      let errorMessage = `ElevenLabs API returned ${response.status}`
+      if (Array.isArray(errorData?.detail)) {
+        errorMessage = errorData.detail.map((e: any) => `${e.loc?.join('.')}: ${e.msg}`).join('; ')
+      } else if (typeof errorData?.detail === 'string') {
+        errorMessage = errorData.detail
+      } else if (errorData?.detail?.message) {
+        errorMessage = errorData.detail.message
+      }
       throw createError({
         statusCode: response.status,
         statusMessage: 'ElevenLabs API error',
         data: {
           error: 'elevenlabs_error',
-          message: errorData?.detail?.message || errorData?.detail || `ElevenLabs API returned ${response.status}`
+          message: errorMessage
         }
       })
     }
