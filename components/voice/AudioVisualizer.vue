@@ -25,7 +25,7 @@ function getBarHeight(index: number): string {
       :key="i"
       :class="[
         'w-1.5 rounded-full transition-all duration-150',
-        active ? 'bg-accent-teal' : 'bg-surface-500'
+        active ? 'bg-accent-amber' : 'bg-surface-500'
       ]"
       :style="{
         height: active ? `${Math.max(15, Math.random() * level * 100)}%` : '15%',

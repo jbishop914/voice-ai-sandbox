@@ -13,26 +13,30 @@ export default <Config>{
     extend: {
       colors: {
         surface: {
-          '900': '#0a0a0f',
-          '800': '#12121a',
-          '700': '#1a1a2e',
-          '600': '#222240',
-          '500': '#2a2a4a',
-          '400': '#3a3a5c',
-          '300': '#4a4a6a'
+          '900': '#050507',
+          '800': '#0a0a0e',
+          '700': '#111116',
+          '600': '#1a1a20',
+          '500': '#24242c',
+          '400': '#32323c',
+          '300': '#44444f'
         },
         accent: {
-          teal: '#00d4aa',
-          'teal-dim': '#00a888',
-          'teal-glow': 'rgba(0, 212, 170, 0.15)',
-          purple: '#7c3aed',
-          'purple-dim': '#6025c7',
-          'purple-glow': 'rgba(124, 58, 237, 0.15)'
+          amber: '#f5a623',
+          'amber-dim': '#d48f1c',
+          'amber-glow': 'rgba(245, 166, 35, 0.15)',
+          orange: '#e8742a',
+          'orange-dim': '#c46022',
+          'orange-glow': 'rgba(232, 116, 42, 0.15)',
+          red: '#d44030',
+          'red-dim': '#b83528',
+          'red-glow': 'rgba(212, 64, 48, 0.15)',
+          warm: '#f0c040'
         },
         text: {
-          primary: '#e8e8f0',
-          secondary: '#9898b0',
-          muted: '#6a6a80'
+          primary: '#f0f0f2',
+          secondary: '#9898a0',
+          muted: '#606068'
         }
       },
       fontFamily: {

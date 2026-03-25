@@ -51,7 +51,7 @@ function applyConfig() {
       <div>
         <label class="label-text">
           Temperature
-          <span class="text-accent-teal font-mono ml-1">{{ config.temperature.toFixed(1) }}</span>
+          <span class="text-accent-amber font-mono ml-1">{{ config.temperature.toFixed(1) }}</span>
         </label>
         <input
           v-model.number="config.temperature"
@@ -59,7 +59,7 @@ function applyConfig() {
           min="0"
           max="1.2"
           step="0.1"
-          class="w-full accent-accent-teal"
+          class="w-full accent-accent-amber"
         />
         <div class="flex justify-between text-[10px] text-text-muted mt-0.5">
           <span>Precise</span>
@@ -71,7 +71,7 @@ function applyConfig() {
       <div>
         <label class="label-text">
           VAD Threshold
-          <span class="text-accent-teal font-mono ml-1">{{ config.vadThreshold.toFixed(2) }}</span>
+          <span class="text-accent-amber font-mono ml-1">{{ config.vadThreshold.toFixed(2) }}</span>
         </label>
         <input
           v-model.number="config.vadThreshold"
@@ -79,7 +79,7 @@ function applyConfig() {
           min="0"
           max="1"
           step="0.05"
-          class="w-full accent-accent-teal"
+          class="w-full accent-accent-amber"
         />
         <div class="flex justify-between text-[10px] text-text-muted mt-0.5">
           <span>Sensitive</span>

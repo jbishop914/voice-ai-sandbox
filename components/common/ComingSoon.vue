@@ -12,7 +12,7 @@ defineProps<Props>()
   <div class="flex items-center justify-center min-h-[calc(100vh-64px)] p-8">
     <div class="text-center max-w-md">
       <!-- Icon circle -->
-      <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-surface-700/50 border border-surface-500/30 flex items-center justify-center text-accent-purple glow-purple">
+      <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-surface-700/50 border border-surface-500/20 flex items-center justify-center text-white/60">
         <!-- Mic -->
         <svg v-if="icon === 'mic'" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" y1="19" x2="12" y2="23" /><line x1="8" y1="23" x2="16" y2="23" />

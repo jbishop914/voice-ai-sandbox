@@ -37,7 +37,7 @@ const statusLabel = computed(() => {
 })
 
 const statusClass = computed(() => {
-  if (props.connectionState === 'connected') return 'text-accent-teal'
+  if (props.connectionState === 'connected') return 'text-accent-amber'
   if (props.connectionState === 'connecting') return 'text-yellow-400'
   return 'text-red-400'
 })
@@ -46,7 +46,7 @@ const statusClass = computed(() => {
 <template>
   <div class="panel flex flex-col h-full">
     <!-- Header -->
-    <div class="flex items-center justify-between px-5 py-3 border-b border-surface-600/30">
+    <div class="flex items-center justify-between px-5 py-3 border-b border-surface-500/30">
       <div class="flex items-center gap-3">
         <h3 class="text-sm font-semibold text-text-primary">Conversation</h3>
         <span :class="['text-xs font-mono', statusClass]">
@@ -116,26 +116,26 @@ const statusClass = computed(() => {
     <!-- Speaking indicator -->
     <div
       v-if="isListening || isSpeaking"
-      class="px-4 py-2 border-t border-surface-600/20"
+      class="px-4 py-2 border-t border-surface-500/20"
     >
       <div class="flex items-center gap-2">
         <div class="flex gap-1">
-          <span class="w-1.5 h-1.5 rounded-full bg-accent-teal animate-bounce" style="animation-delay: 0ms" />
-          <span class="w-1.5 h-1.5 rounded-full bg-accent-teal animate-bounce" style="animation-delay: 150ms" />
-          <span class="w-1.5 h-1.5 rounded-full bg-accent-teal animate-bounce" style="animation-delay: 300ms" />
+          <span class="w-1.5 h-1.5 rounded-full bg-accent-amber animate-bounce" style="animation-delay: 0ms" />
+          <span class="w-1.5 h-1.5 rounded-full bg-accent-amber animate-bounce" style="animation-delay: 150ms" />
+          <span class="w-1.5 h-1.5 rounded-full bg-accent-amber animate-bounce" style="animation-delay: 300ms" />
         </div>
-        <span class="text-xs text-accent-teal">
+        <span class="text-xs text-accent-amber">
           {{ isSpeaking ? 'Assistant is speaking...' : 'Listening...' }}
         </span>
       </div>
     </div>
 
     <!-- Connect/Disconnect button area -->
-    <div class="px-5 py-4 border-t border-surface-600/30">
+    <div class="px-5 py-4 border-t border-surface-500/30">
       <button
         v-if="connectionState === 'disconnected'"
         @click="emit('connect')"
-        class="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-accent-teal text-surface-900 font-bold text-sm hover:bg-accent-teal-dim transition-all duration-200 glow-teal"
+        class="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-accent-amber text-surface-900 font-bold text-sm hover:bg-accent-amber-dim transition-all duration-200 glow-amber"
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" y1="19" x2="12" y2="23" /><line x1="8" y1="23" x2="16" y2="23" />

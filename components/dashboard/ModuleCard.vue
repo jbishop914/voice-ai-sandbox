@@ -13,7 +13,7 @@ defineProps<Props>()
 <template>
   <NuxtLink :to="to" class="card-hover group block">
     <div class="flex items-start justify-between mb-3">
-      <div class="w-10 h-10 rounded-lg bg-surface-700 flex items-center justify-center text-text-secondary group-hover:text-accent-teal group-hover:bg-accent-teal/10 transition-colors">
+      <div class="w-10 h-10 rounded-lg bg-surface-700 flex items-center justify-center text-white/40 group-hover:text-accent-amber group-hover:bg-accent-amber/10 transition-colors">
         <!-- Home -->
         <svg v-if="icon === 'home'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" />
@@ -51,7 +51,7 @@ defineProps<Props>()
       <span v-if="status === 'active'" class="badge-active">Active</span>
       <span v-else class="badge-coming-soon">Coming Soon</span>
     </div>
-    <h3 class="text-sm font-semibold text-text-primary mb-1 group-hover:text-accent-teal transition-colors">
+    <h3 class="text-sm font-semibold text-text-primary mb-1 group-hover:text-accent-amber transition-colors">
       {{ title }}
     </h3>
     <p class="text-xs text-text-secondary leading-relaxed">

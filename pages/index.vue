@@ -75,13 +75,13 @@ const stats = [
     <!-- Hero -->
     <div class="mb-8">
       <div class="flex items-center gap-3 mb-3">
+        <!-- Voxagen logo (monochrome white) -->
         <svg width="36" height="36" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="14" cy="14" r="13" stroke="#00d4aa" stroke-width="1.5" />
-          <path d="M9 18V10M14 20V8M19 18V10" stroke="#00d4aa" stroke-width="2" stroke-linecap="round" />
-          <circle cx="14" cy="14" r="5" stroke="#7c3aed" stroke-width="1" opacity="0.5" />
+          <rect x="1" y="1" width="26" height="26" rx="6" stroke="white" stroke-width="1.5" fill="none" />
+          <path d="M7 17L10.5 9L14 17L17.5 7L21 17" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
         <div>
-          <h1 class="text-2xl font-bold text-text-primary">Voice AI Sandbox</h1>
+          <h1 class="text-2xl font-bold text-text-primary">Voxagen</h1>
           <p class="text-sm text-text-secondary">Experimental platform for voice-to-voice conversational AI</p>
         </div>
       </div>
@@ -94,7 +94,7 @@ const stats = [
         :key="stat.label"
         class="card flex items-center gap-4"
       >
-        <div class="w-10 h-10 rounded-lg bg-surface-700 flex items-center justify-center text-text-muted">
+        <div class="w-10 h-10 rounded-lg bg-surface-700 flex items-center justify-center text-white/40">
           <!-- Activity -->
           <svg v-if="stat.icon === 'activity'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />

@@ -47,8 +47,8 @@ function handleApplyConfig(config: SessionConfig) {
 <template>
   <div class="h-full flex flex-col">
     <!-- Page header -->
-    <div class="flex items-center gap-3 px-5 py-3 border-b border-surface-600/30 bg-surface-800/30 flex-shrink-0">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-teal">
+    <div class="flex items-center gap-3 px-5 py-3 border-b border-surface-500/20 bg-surface-800/30 flex-shrink-0">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
         <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" y1="19" x2="12" y2="23" /><line x1="8" y1="23" x2="16" y2="23" />
       </svg>
       <h1 class="text-sm font-semibold text-text-primary">Direct Voice Chat</h1>

@@ -82,7 +82,7 @@ const statusLabel = computed(() => {
       <!-- Model -->
       <div class="space-y-2">
         <div class="label-text">Model</div>
-        <div class="text-xs font-mono text-accent-teal bg-surface-700 px-2.5 py-1.5 rounded-md inline-block">
+        <div class="text-xs font-mono text-accent-amber bg-surface-700 px-2.5 py-1.5 rounded-md inline-block">
           gpt-4o-realtime-preview
         </div>
       </div>
@@ -90,7 +90,7 @@ const statusLabel = computed(() => {
       <!-- Audio Visualizer -->
       <div class="space-y-2">
         <div class="label-text">Audio Level</div>
-        <div class="bg-surface-700/50 rounded-lg p-3 border border-surface-600/30">
+        <div class="bg-surface-700/50 rounded-lg p-3 border border-surface-500/30">
           <VoiceAudioVisualizer
             :level="audioLevel"
             :active="connectionState === 'connected'"
@@ -104,13 +104,13 @@ const statusLabel = computed(() => {
         <div class="space-y-1.5">
           <div class="flex items-center justify-between text-xs">
             <span class="text-text-secondary">Listening</span>
-            <span :class="isListening ? 'text-accent-teal' : 'text-text-muted'">
+            <span :class="isListening ? 'text-accent-amber' : 'text-text-muted'">
               {{ isListening ? 'Active' : 'Idle' }}
             </span>
           </div>
           <div class="flex items-center justify-between text-xs">
             <span class="text-text-secondary">AI Speaking</span>
-            <span :class="isSpeaking ? 'text-accent-teal' : 'text-text-muted'">
+            <span :class="isSpeaking ? 'text-accent-amber' : 'text-text-muted'">
               {{ isSpeaking ? 'Active' : 'Idle' }}
             </span>
           </div>

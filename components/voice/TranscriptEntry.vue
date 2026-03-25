@@ -23,7 +23,7 @@ function formatTime(date: Date): string {
       'flex gap-3 py-3 px-4 rounded-lg transition-colors',
       entry.speaker === 'user'
         ? 'bg-surface-700/30'
-        : 'bg-accent-teal/5'
+        : 'bg-accent-amber/5'
     ]"
   >
     <!-- Speaker avatar -->
@@ -31,8 +31,8 @@ function formatTime(date: Date): string {
       :class="[
         'w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold mt-0.5',
         entry.speaker === 'user'
-          ? 'bg-accent-purple/20 text-accent-purple'
-          : 'bg-accent-teal/20 text-accent-teal'
+          ? 'bg-accent-orange/15 text-accent-orange'
+          : 'bg-accent-amber/15 text-accent-amber'
       ]"
     >
       {{ entry.speaker === 'user' ? 'U' : 'AI' }}
@@ -44,7 +44,7 @@ function formatTime(date: Date): string {
         <span
           :class="[
             'text-xs font-semibold uppercase tracking-wide',
-            entry.speaker === 'user' ? 'text-accent-purple' : 'text-accent-teal'
+            entry.speaker === 'user' ? 'text-accent-orange' : 'text-accent-amber'
           ]"
         >
           {{ entry.speaker === 'user' ? 'You' : 'Assistant' }}
@@ -54,7 +54,7 @@ function formatTime(date: Date): string {
         </span>
         <span
           v-if="!entry.isFinal"
-          class="w-1.5 h-1.5 rounded-full bg-accent-teal animate-pulse"
+          class="w-1.5 h-1.5 rounded-full bg-accent-amber animate-pulse"
         />
       </div>
       <p class="text-sm text-text-primary leading-relaxed">

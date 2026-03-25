@@ -30,47 +30,47 @@
   }
 
   ::selection {
-    @apply bg-accent-teal/20 text-accent-teal;
+    @apply bg-accent-amber/20 text-accent-amber;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply px-4 py-2 bg-accent-teal text-surface-900 font-semibold rounded-lg
-           hover:bg-accent-teal-dim transition-colors duration-200
-           focus:outline-none focus:ring-2 focus:ring-accent-teal/50;
+    @apply px-4 py-2 bg-accent-amber text-surface-900 font-semibold rounded-lg
+           hover:bg-accent-amber-dim transition-colors duration-200
+           focus:outline-none focus:ring-2 focus:ring-accent-amber/50;
   }
 
   .btn-secondary {
     @apply px-4 py-2 bg-surface-600 text-text-primary rounded-lg
            hover:bg-surface-500 transition-colors duration-200
            border border-surface-400/30
-           focus:outline-none focus:ring-2 focus:ring-accent-purple/50;
+           focus:outline-none focus:ring-2 focus:ring-accent-orange/50;
   }
 
   .card {
-    @apply bg-surface-800 border border-surface-600/40 rounded-xl p-5;
+    @apply bg-surface-800 border border-surface-500/30 rounded-xl p-5;
   }
 
   .card-hover {
-    @apply card hover:border-accent-teal/30 hover:shadow-lg hover:shadow-accent-teal/5
+    @apply card hover:border-accent-amber/25 hover:shadow-lg hover:shadow-accent-amber/5
            transition-all duration-300 cursor-pointer;
   }
 
   .badge-active {
     @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-           bg-accent-teal/15 text-accent-teal border border-accent-teal/20;
+           bg-accent-amber/12 text-accent-amber border border-accent-amber/20;
   }
 
   .badge-coming-soon {
     @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-           bg-accent-purple/15 text-accent-purple border border-accent-purple/20;
+           bg-surface-500/30 text-text-muted border border-surface-400/30;
   }
 
   .input-field {
-    @apply w-full bg-surface-700 border border-surface-500/50 rounded-lg px-3 py-2
+    @apply w-full bg-surface-700 border border-surface-500/40 rounded-lg px-3 py-2
            text-text-primary text-sm placeholder-text-muted
-           focus:outline-none focus:border-accent-teal/50 focus:ring-1 focus:ring-accent-teal/30
+           focus:outline-none focus:border-accent-amber/50 focus:ring-1 focus:ring-accent-amber/30
            transition-colors duration-200;
   }
 
@@ -79,7 +79,7 @@
   }
 
   .panel {
-    @apply bg-surface-800/80 border border-surface-600/30 rounded-xl backdrop-blur-sm;
+    @apply bg-surface-800/80 border border-surface-500/20 rounded-xl backdrop-blur-sm;
   }
 
   .status-dot {
@@ -87,32 +87,32 @@
   }
 
   .status-dot-connected {
-    @apply status-dot bg-accent-teal shadow-[0_0_8px_rgba(0,212,170,0.5)];
+    @apply status-dot bg-accent-warm shadow-[0_0_8px_rgba(240,192,64,0.5)];
   }
 
   .status-dot-disconnected {
-    @apply status-dot bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)];
+    @apply status-dot bg-accent-red shadow-[0_0_8px_rgba(212,64,48,0.5)];
   }
 
   .status-dot-connecting {
-    @apply status-dot bg-yellow-400 shadow-[0_0_8px_rgba(250,204,21,0.5)] animate-pulse;
+    @apply status-dot bg-accent-amber shadow-[0_0_8px_rgba(245,166,35,0.5)] animate-pulse;
   }
 
-  .glow-teal {
-    box-shadow: 0 0 20px rgba(0, 212, 170, 0.15), 0 0 60px rgba(0, 212, 170, 0.05);
+  .glow-amber {
+    box-shadow: 0 0 20px rgba(245, 166, 35, 0.15), 0 0 60px rgba(245, 166, 35, 0.05);
   }
 
-  .glow-purple {
-    box-shadow: 0 0 20px rgba(124, 58, 237, 0.15), 0 0 60px rgba(124, 58, 237, 0.05);
+  .glow-orange {
+    box-shadow: 0 0 20px rgba(232, 116, 42, 0.15), 0 0 60px rgba(232, 116, 42, 0.05);
   }
 }
 
 @layer utilities {
-  .text-gradient-teal {
-    @apply bg-gradient-to-r from-accent-teal to-emerald-400 bg-clip-text text-transparent;
+  .text-gradient-warm {
+    @apply bg-gradient-to-r from-accent-amber to-accent-orange bg-clip-text text-transparent;
   }
 
-  .text-gradient-purple {
-    @apply bg-gradient-to-r from-accent-purple to-violet-400 bg-clip-text text-transparent;
+  .text-gradient-fire {
+    @apply bg-gradient-to-r from-accent-orange to-accent-red bg-clip-text text-transparent;
   }
 }

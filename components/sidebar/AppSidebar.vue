@@ -29,24 +29,23 @@ function isActive(to: string) {
 <template>
   <aside
     :class="[
-      'h-screen flex flex-col bg-surface-800 border-r border-surface-600/40 transition-all duration-300 relative z-30',
+      'h-screen flex flex-col bg-surface-800 border-r border-surface-500/20 transition-all duration-300 relative z-30',
       collapsed ? 'w-[68px]' : 'w-[240px]'
     ]"
   >
     <!-- Header -->
-    <div class="flex items-center h-16 px-4 border-b border-surface-600/40 flex-shrink-0">
+    <div class="flex items-center h-16 px-4 border-b border-surface-500/20 flex-shrink-0">
       <div class="flex items-center gap-3 min-w-0">
-        <!-- Logo SVG -->
+        <!-- Voxagen Logo: Monochrome white, abstract soundwave/voice mark -->
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
-          <circle cx="14" cy="14" r="13" stroke="#00d4aa" stroke-width="1.5" />
-          <path d="M9 18V10M14 20V8M19 18V10" stroke="#00d4aa" stroke-width="2" stroke-linecap="round" />
-          <circle cx="14" cy="14" r="5" stroke="#7c3aed" stroke-width="1" opacity="0.5" />
+          <rect x="1" y="1" width="26" height="26" rx="6" stroke="white" stroke-width="1.5" fill="none" />
+          <path d="M7 17L10.5 9L14 17L17.5 7L21 17" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
         <span
           v-if="!collapsed"
           class="text-sm font-semibold text-text-primary whitespace-nowrap"
         >
-          Voice AI Sandbox
+          Voxagen
         </span>
       </div>
     </div>
@@ -54,7 +53,7 @@ function isActive(to: string) {
     <!-- Collapse toggle -->
     <button
       @click="collapsed = !collapsed"
-      class="absolute -right-3 top-20 w-6 h-6 bg-surface-700 border border-surface-500/50 rounded-full flex items-center justify-center text-text-muted hover:text-accent-teal hover:border-accent-teal/50 transition-colors z-40"
+      class="absolute -right-3 top-20 w-6 h-6 bg-surface-700 border border-surface-500/40 rounded-full flex items-center justify-center text-text-muted hover:text-white hover:border-white/40 transition-colors z-40"
       :title="collapsed ? 'Expand sidebar' : 'Collapse sidebar'"
     >
       <svg
@@ -74,7 +73,7 @@ function isActive(to: string) {
         :class="[
           'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-200 group relative',
           isActive(item.to)
-            ? 'bg-accent-teal/10 text-accent-teal'
+            ? 'bg-accent-amber/10 text-accent-amber'
             : 'text-text-secondary hover:bg-surface-700 hover:text-text-primary'
         ]"
         :title="collapsed ? item.label : undefined"
@@ -82,10 +81,10 @@ function isActive(to: string) {
         <!-- Active indicator bar -->
         <div
           v-if="isActive(item.to)"
-          class="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-accent-teal rounded-r"
+          class="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-accent-amber rounded-r"
         />
 
-        <!-- Icon -->
+        <!-- Icon (monochrome white) -->
         <div class="w-5 h-5 flex items-center justify-center flex-shrink-0">
           <!-- Home -->
           <svg v-if="item.icon === 'home'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -133,13 +132,13 @@ function isActive(to: string) {
         <!-- Coming soon dot -->
         <div
           v-if="item.status === 'coming-soon' && !collapsed"
-          class="ml-auto w-1.5 h-1.5 rounded-full bg-accent-purple/60"
+          class="ml-auto w-1.5 h-1.5 rounded-full bg-surface-400/60"
         />
       </NuxtLink>
     </nav>
 
     <!-- Footer -->
-    <div class="px-3 py-3 border-t border-surface-600/40 flex-shrink-0">
+    <div class="px-3 py-3 border-t border-surface-500/20 flex-shrink-0">
       <div v-if="!collapsed" class="text-[10px] text-text-muted leading-relaxed">
         v0.1.0
       </div>
