@@ -5,6 +5,34 @@ export function useAudioPlayback() {
   let audioQueue: AudioBuffer[] = []
   let currentSource: AudioBufferSourceNode | null = null
   let isProcessingQueue = false
+  // Default to 16000 Hz — ElevenLabs Conversational AI default
+  // This gets updated when we receive the actual format from the server
+  let sampleRate = 16000
+
+  function setSampleRate(rate: number) {
+    sampleRate = rate
+    // Recreate audio context with correct sample rate if it exists
+    if (audioContext) {
+      audioContext.close()
+      audioContext = null
+    }
+  }
+
+  /**
+   * Parse sample rate from ElevenLabs audio format strings like "pcm_16000", "pcm_44100", "ulaw_8000"
+   */
+  function parseSampleRateFromFormat(format: string): number {
+    const match = format.match(/_(\d+)$/)
+    if (match) return parseInt(match[1])
+    // Fallback defaults
+    if (format.includes('ulaw') || format.includes('mulaw')) return 8000
+    return 16000
+  }
+
+  function setFormatFromMetadata(format: string) {
+    const rate = parseSampleRateFromFormat(format)
+    setSampleRate(rate)
+  }
 
   function base64ToPCM16Float32(base64Audio: string): Float32Array {
     const binaryString = atob(base64Audio)
@@ -22,7 +50,7 @@ export function useAudioPlayback() {
 
   function ensureAudioContext() {
     if (!audioContext) {
-      audioContext = new AudioContext({ sampleRate: 24000 })
+      audioContext = new AudioContext({ sampleRate })
     }
     return audioContext
   }
@@ -58,7 +86,7 @@ export function useAudioPlayback() {
     const ctx = ensureAudioContext()
     const float32Data = base64ToPCM16Float32(base64Audio)
 
-    const audioBuffer = ctx.createBuffer(1, float32Data.length, 24000)
+    const audioBuffer = ctx.createBuffer(1, float32Data.length, sampleRate)
     audioBuffer.copyToChannel(float32Data, 0)
 
     audioQueue.push(audioBuffer)
@@ -88,6 +116,8 @@ export function useAudioPlayback() {
   return {
     isPlaying: readonly(isPlaying),
     playChunk,
-    stop
+    stop,
+    setSampleRate,
+    setFormatFromMetadata
   }
 }

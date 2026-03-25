@@ -26,12 +26,20 @@ export function useElevenLabs() {
       const msg = JSON.parse(event.data)
 
       switch (msg.type) {
-        case 'conversation_initiation_metadata':
-          conversationId = msg.conversation_initiation_metadata_event?.conversation_id || null
+        case 'conversation_initiation_metadata': {
+          const metadata = msg.conversation_initiation_metadata_event
+          conversationId = metadata?.conversation_id || null
+          // Read the actual audio format from the server and configure playback
+          const outputFormat = metadata?.agent_output_audio_format
+          if (outputFormat) {
+            console.log('[ElevenLabs] Agent output audio format:', outputFormat)
+            audioPlayback.setFormatFromMetadata(outputFormat)
+          }
           connectionState.value = 'connected'
           isListening.value = true
           error.value = null
           break
+        }
 
         case 'audio':
           if (msg.audio_event?.audio_base_64) {

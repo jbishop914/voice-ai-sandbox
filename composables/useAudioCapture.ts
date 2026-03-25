@@ -46,14 +46,17 @@ export function useAudioCapture() {
       error.value = null
       mediaStream = await navigator.mediaDevices.getUserMedia({
         audio: {
-          sampleRate: 24000,
+          sampleRate: 16000,
           channelCount: 1,
           echoCancellation: true,
           noiseSuppression: true
         }
       })
 
-      audioContext = new AudioContext({ sampleRate: 24000 })
+      // ElevenLabs Conversational AI expects 16kHz PCM16 mono input
+      // OpenAI Realtime API expects 24kHz PCM16 mono input
+      // Default to 16kHz for ElevenLabs; OpenAI composable handles its own capture
+      audioContext = new AudioContext({ sampleRate: 16000 })
       const source = audioContext.createMediaStreamSource(mediaStream)
 
       // Analyser for audio level visualization
