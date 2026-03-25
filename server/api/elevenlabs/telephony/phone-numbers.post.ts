@@ -15,11 +15,12 @@ export default defineEventHandler(async (event) => {
 
   const body = await readBody(event)
 
+  // Accept fields from either nested twilio object (UI sends this) or flat
+  const phoneNumber = body.twilio?.phone_number || body.phone_number
+  const label = body.twilio?.label || body.label || ''
   // Use provided Twilio credentials or fall back to env vars
-  const twilioAccountSid = body.twilio?.twilio_account_sid || config.twilioAccountSid
-  const twilioAuthToken = body.twilio?.twilio_auth_token || config.twilioAuthToken
-  const phoneNumber = body.twilio?.phone_number
-  const label = body.twilio?.label || ''
+  const sid = body.twilio?.twilio_account_sid || body.twilio?.sid || body.sid || config.twilioAccountSid
+  const token = body.twilio?.twilio_auth_token || body.twilio?.token || body.token || config.twilioAuthToken
 
   if (!phoneNumber) {
     throw createError({
@@ -28,7 +29,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  if (!twilioAccountSid || !twilioAuthToken) {
+  if (!sid || !token) {
     throw createError({
       statusCode: 400,
       statusMessage: 'Twilio credentials required',
@@ -40,6 +41,8 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
+    // ElevenLabs API expects FLAT body: { phone_number, label, sid, token, provider }
+    // NOT nested under a "twilio" key (confirmed via OpenAPI spec)
     const response = await fetch('https://api.elevenlabs.io/v1/convai/phone-numbers', {
       method: 'POST',
       headers: {
@@ -47,21 +50,22 @@ export default defineEventHandler(async (event) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        twilio: {
-          phone_number: phoneNumber,
-          label,
-          sid: twilioAccountSid,
-          token: twilioAuthToken
-        }
+        provider: 'twilio',
+        phone_number: phoneNumber,
+        label,
+        sid,
+        token
       })
     })
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}))
-      // ElevenLabs 422 returns detail as an array of validation errors
       let errorMessage = `ElevenLabs API returned ${response.status}`
       if (Array.isArray(errorData?.detail)) {
-        errorMessage = errorData.detail.map((e: any) => `${e.loc?.join('.')}: ${e.msg}`).join('; ')
+        errorMessage = errorData.detail
+          .filter((e: any) => e.loc?.[1] === 'CreateTwilioPhoneNumberRequest')
+          .map((e: any) => `${e.loc?.slice(2).join('.')}: ${e.msg}`)
+          .join('; ') || errorData.detail.map((e: any) => `${e.loc?.join('.')}: ${e.msg}`).join('; ')
       } else if (typeof errorData?.detail === 'string') {
         errorMessage = errorData.detail
       } else if (errorData?.detail?.message) {
@@ -70,10 +74,7 @@ export default defineEventHandler(async (event) => {
       throw createError({
         statusCode: response.status,
         statusMessage: 'ElevenLabs API error',
-        data: {
-          error: 'elevenlabs_error',
-          message: errorMessage
-        }
+        data: { error: 'elevenlabs_error', message: errorMessage }
       })
     }
 
