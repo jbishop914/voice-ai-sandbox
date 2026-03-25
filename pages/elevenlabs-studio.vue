@@ -311,7 +311,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="p-6 lg:p-8 max-w-5xl mx-auto">
+  <div class="flex h-[calc(100vh-64px)] overflow-hidden">
+    <!-- Left Panel: Agent List + Detail + Edit/Create (~60%) -->
+    <div class="flex-[3] overflow-y-auto border-r border-surface-500/20 p-6 lg:p-8">
     <!-- Section 1: Page Header -->
     <div class="flex items-center gap-3 mb-6">
       <div class="w-10 h-10 rounded-xl bg-accent-amber/10 border border-accent-amber/20 flex items-center justify-center">
@@ -534,29 +536,7 @@ onMounted(() => {
         <p class="text-xs text-text-muted/60">Or click "New Agent" to create one</p>
       </div>
 
-      <!-- Agent Tester (inline, shown when Test Agent clicked) -->
-      <Transition
-        enter-active-class="transition-all duration-200 ease-out"
-        enter-from-class="opacity-0 -translate-y-2"
-        enter-to-class="opacity-100 translate-y-0"
-        leave-active-class="transition-all duration-150 ease-in"
-        leave-from-class="opacity-100 translate-y-0"
-        leave-to-class="opacity-0 -translate-y-2"
-      >
-        <div v-if="showTester && selectedAgentId" class="mb-6">
-          <div class="flex items-center justify-between mb-3">
-            <h2 class="text-sm font-bold text-text-secondary uppercase tracking-widest">Agent Tester</h2>
-            <button @click="closeTester" class="text-xs text-text-muted hover:text-text-secondary transition-colors">Close</button>
-          </div>
-          <div class="h-[500px]">
-            <ElevenlabsAgentTester
-              :agent-id="selectedAgentId"
-              :agent-name="selectedAgentName"
-              :voice-name="selectedAgentVoiceName"
-            />
-          </div>
-        </div>
-      </Transition>
+
 
       <!-- Section 4: Edit Agent Form -->
       <Transition
@@ -717,5 +697,15 @@ onMounted(() => {
         </div>
       </Transition>
     </template>
+    </div>
+
+    <!-- Right Panel: Agent Tester (persistent) -->
+    <div class="flex-[2] flex flex-col min-w-0 hidden lg:flex">
+      <ElevenlabsAgentTester
+        :agent-id="selectedAgentId"
+        :agent-name="selectedAgentName"
+        :voice-name="selectedAgentVoiceName"
+      />
+    </div>
   </div>
 </template>
