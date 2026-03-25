@@ -59,7 +59,7 @@
 
   .badge-active {
     @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-           bg-accent-amber/12 text-accent-amber border border-accent-amber/20;
+           bg-accent-amber/10 text-accent-amber border border-accent-amber/20;
   }
 
   .badge-coming-soon {
