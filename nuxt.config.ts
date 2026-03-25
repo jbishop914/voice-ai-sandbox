@@ -20,6 +20,7 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
-    openaiApiKey: process.env.OPENAI_API_KEY || ''
+    openaiApiKey: process.env.OPENAI_API_KEY || '',
+    elevenlabsApiKey: process.env.ELEVENLABS_API_KEY || ''
   }
 })

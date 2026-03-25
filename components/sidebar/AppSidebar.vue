@@ -14,7 +14,7 @@ const navItems: NavItem[] = [
   { label: 'Dashboard', icon: 'home', to: '/', status: 'active' },
   { label: 'Direct Voice Chat', icon: 'mic', to: '/direct-voice', status: 'active' },
   { label: 'Telephony Lab', icon: 'phone', to: '/telephony-lab', status: 'coming-soon' },
-  { label: 'ElevenLabs Studio', icon: 'waveform', to: '/elevenlabs-studio', status: 'coming-soon' },
+  { label: 'ElevenLabs Studio', icon: 'waveform', to: '/elevenlabs-studio', status: 'active' },
   { label: 'Multi-Agent', icon: 'users', to: '/multi-agent', status: 'coming-soon' },
   { label: 'Operator Dashboard', icon: 'monitor', to: '/operator-dashboard', status: 'coming-soon' },
   { label: 'Conference Bridge', icon: 'phone-forwarded', to: '/conference-bridge', status: 'coming-soon' },

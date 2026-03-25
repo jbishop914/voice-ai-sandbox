@@ -29,7 +29,7 @@ const modules: ModuleInfo[] = [
   {
     title: 'ElevenLabs Studio',
     description: 'Experiment with ElevenLabs voice synthesis, cloning, and voice design tools.',
-    status: 'coming-soon',
+    status: 'active',
     to: '/elevenlabs-studio',
     icon: 'waveform'
   },
