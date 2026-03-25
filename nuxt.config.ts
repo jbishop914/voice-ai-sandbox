@@ -21,6 +21,9 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     openaiApiKey: process.env.OPENAI_API_KEY || '',
-    elevenlabsApiKey: process.env.ELEVENLABS_API_KEY || ''
+    elevenlabsApiKey: process.env.ELEVENLABS_API_KEY || '',
+    twilioAccountSid: process.env.TWILIO_ACCOUNT_SID || '',
+    twilioAuthToken: process.env.TWILIO_AUTH_TOKEN || '',
+    twilioPhoneNumber: process.env.TWILIO_PHONE_NUMBER || ''
   }
 })

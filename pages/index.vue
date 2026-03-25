@@ -22,7 +22,7 @@ const modules: ModuleInfo[] = [
   {
     title: 'Telephony Lab',
     description: 'Test voice AI over PSTN phone calls with Twilio and Vonage integrations.',
-    status: 'coming-soon',
+    status: 'active',
     to: '/telephony-lab',
     icon: 'phone'
   },
