@@ -10,46 +10,53 @@ interface Props {
     }
   }
   voiceName?: string
+  selected?: boolean
 }
 
 defineProps<Props>()
 const emit = defineEmits<{
+  select: [agentId: string]
   test: [agentId: string]
   edit: [agentId: string]
 }>()
 </script>
 
 <template>
-  <div class="card-hover flex items-center gap-4">
+  <button
+    type="button"
+    @click="emit('select', agent.agent_id)"
+    :class="[
+      'w-full flex items-center gap-3 px-3 h-11 text-left transition-all duration-150',
+      selected
+        ? 'bg-surface-700/50 border-l-2 border-l-accent-amber border-b border-b-surface-500/15'
+        : 'hover:bg-surface-700/30 border-l-2 border-l-transparent border-b border-b-surface-500/15'
+    ]"
+  >
     <!-- Agent icon -->
-    <div class="w-10 h-10 rounded-lg bg-accent-amber/10 border border-accent-amber/20 flex items-center justify-center shrink-0">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-amber">
+    <div
+      :class="[
+        'w-7 h-7 rounded-md flex items-center justify-center shrink-0',
+        selected ? 'bg-accent-amber/15' : 'bg-surface-700/50'
+      ]"
+    >
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" :class="selected ? 'text-accent-amber' : 'text-text-muted'">
         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
       </svg>
     </div>
 
-    <!-- Info -->
-    <div class="flex-1 min-w-0">
-      <h4 class="text-sm font-semibold text-text-primary truncate">{{ agent.name }}</h4>
-      <p class="text-xs text-text-muted truncate">
-        Voice: {{ voiceName || 'Default' }}
-      </p>
-    </div>
+    <!-- Name -->
+    <span :class="['text-sm font-semibold truncate flex-1 min-w-0', selected ? 'text-text-primary' : 'text-text-secondary']">
+      {{ agent.name }}
+    </span>
 
-    <!-- Actions -->
-    <div class="flex items-center gap-2 shrink-0">
-      <button
-        @click="emit('test', agent.agent_id)"
-        class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-accent-amber/15 text-accent-amber border border-accent-amber/25 hover:bg-accent-amber/25 transition-colors"
-      >
-        Test
-      </button>
-      <button
-        @click="emit('edit', agent.agent_id)"
-        class="btn-secondary !px-3 !py-1.5 text-xs"
-      >
-        Edit
-      </button>
-    </div>
-  </div>
+    <!-- Voice name -->
+    <span class="text-xs text-text-muted truncate max-w-[140px] shrink-0 hidden sm:block">
+      {{ voiceName || 'Default' }}
+    </span>
+
+    <!-- Agent ID -->
+    <span class="text-[10px] font-mono text-text-muted/50 truncate max-w-[100px] shrink-0 hidden lg:block">
+      {{ agent.agent_id.slice(0, 12) }}...
+    </span>
+  </button>
 </template>
